@@ -5,59 +5,183 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Privacy Policy – Albion Tracker Mobile</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
-    h1 { color: #1a1a2e; }
-    h2 { color: #16213e; margin-top: 30px; }
-    p, li { line-height: 1.7; }
-    a { color: #0066cc; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0f0f1a;
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      padding: 24px 20px;
+      text-align: center;
+      border-bottom: 2px solid #c8a028;
+    }
+    header h1 { color: #c8a028; font-size: 1.6em; letter-spacing: 1px; }
+    header p { color: #aaa; margin-top: 6px; font-size: 0.9em; }
+    .lang-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px auto;
+    }
+    .lang-btn {
+      background: #1e1e35;
+      border: 1px solid #c8a028;
+      color: #c8a028;
+      padding: 8px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: all 0.2s;
+    }
+    .lang-btn.active { background: #c8a028; color: #0f0f1a; font-weight: bold; }
+    .container { max-width: 820px; margin: 0 auto; padding: 20px 20px 60px; }
+    .section {
+      background: #1a1a2e;
+      border-left: 3px solid #c8a028;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .section h2 {
+      color: #c8a028;
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .section p, .section li { line-height: 1.75; color: #ccc; font-size: 0.95em; }
+    .section ul { padding-left: 20px; }
+    .section li { margin-bottom: 6px; }
+    .badge {
+      display: inline-block;
+      background: #0d3b2f;
+      color: #4caf98;
+      border: 1px solid #4caf98;
+      border-radius: 12px;
+      padding: 3px 12px;
+      font-size: 0.8em;
+      margin-bottom: 10px;
+    }
+    .contact a { color: #c8a028; text-decoration: none; }
+    .contact a:hover { text-decoration: underline; }
+    .updated { text-align: center; color: #555; font-size: 0.8em; margin-top: 40px; }
+    [data-lang] { display: none; }
+    [data-lang].visible { display: block; }
   </style>
 </head>
 <body>
 
-<h1>Privacy Policy – Albion Tracker Mobile</h1>
-<p><strong>Last updated:</strong> February 25, 2026</p>
+<header>
+  <h1>⚔ Albion Tracker Mobile</h1>
+  <p>Privacy Policy</p>
+</header>
 
-<p>Albion Tracker Mobile ("the App") is a companion app for the game Albion Online that displays real-time stats such as damage, fame, silver gained, gathering and dungeon data, and allows party stat sharing.</p>
+<div class="lang-toggle">
+  <button class="lang-btn active" onclick="setLang('en')">🇬🇧 English</button>
+  <button class="lang-btn" onclick="setLang('es')">🇪🇸 Español</button>
+</div>
 
-<h2>1. Information We Collect</h2>
-<ul>
-  <li><strong>In-game character name:</strong> You voluntarily enter your Albion Online character name. This name is uploaded to Firebase Realtime Database solely to enable real-time party stat sharing with other players in your group.</li>
-  <li><strong>Game session stats:</strong> Damage dealt, fame gained, silver gained, and equipment data are processed in real time and temporarily stored in Firebase during an active party session.</li>
-  <li><strong>Device identifiers:</strong> Google AdMob may collect your device's Advertising ID to serve personalized or non-personalized ads.</li>
-  <li><strong>App usage data:</strong> AdMob may collect information about ad interactions (views, clicks) and app performance data.</li>
-</ul>
+<div class="container">
 
-<h2>2. How We Use Your Information</h2>
-<ul>
-  <li>Character name and session stats are used exclusively to provide the party sync feature of the App.</li>
-  <li>Device and usage data collected by AdMob is used to display advertisements within the App.</li>
-  <li>We do not sell, trade, or rent your personal data to third parties.</li>
-</ul>
+  <!-- ENGLISH -->
+  <div data-lang="en" class="visible">
 
-<h2>3. Third-Party Services</h2>
-<p>The App uses the following third-party services that may collect data:</p>
-<ul>
-  <li><strong>Google Firebase Realtime Database</strong> – used to sync party stats in real time. <a href="https://firebase.google.com/support/privacy" target="_blank">Firebase Privacy Policy</a></li>
-  <li><strong>Google AdMob</strong> – used to display ads. <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a></li>
-</ul>
+    <div class="section">
+      <div class="badge">✅ No personal data collected</div>
+      <h2>What data does the app collect?</h2>
+      <p>Albion Tracker Mobile does <strong>not collect any personal information</strong>. The app does not request, store, or process names, emails, phone numbers, locations, or any other data that could identify a user.</p>
+      <br/>
+      <p>The only data used within the app are in-game statistics from Albion Online (damage dealt, fame, silver gained, gathered items, dungeons explored), which are read locally from network packets generated by the game itself and are never sent to external servers.</p>
+    </div>
 
-<h2>4. Data Retention</h2>
-<p>Party session data (character name and stats) stored in Firebase is removed automatically when a party session ends. No long-term personal data is stored by the App developer.</p>
+    <div class="section">
+      <h2>Network connection</h2>
+      <p>The app connects exclusively to a <strong>local server run by the user</strong> (AlbionOnline Statistics Analysis Tool — SAT), installed on the same network as the device. This connection is used only to receive real-time game statistics.</p>
+      <br/>
+      <p>No data is sent to the developer's servers or to any server outside the user's local network.</p>
+    </div>
 
-<h2>5. Children's Privacy</h2>
-<p>The App is not directed at children under 13 years of age. We do not knowingly collect personal information from children under 13.</p>
+    <div class="section">
+      <h2>Third-party data sharing</h2>
+      <p>Albion Tracker Mobile does <strong>not share any data with third parties</strong>. No analytics services, advertising networks, or external tracking tools are used.</p>
+    </div>
 
-<h2>6. Data Security</h2>
-<p>All data transmitted by the App is encrypted in transit using HTTPS/TLS.</p>
+    <div class="section">
+      <h2>Party sync feature (optional)</h2>
+      <p>The optional party feature allows players to share in-game stats (damage, fame, silver, weapon used) in real time with other members of their group. This data is synced via Firebase Realtime Database only during the active party session and is <strong>not stored permanently</strong>. The only identifier used is the in-game character name voluntarily entered by the user.</p>
+    </div>
 
-<h2>7. Your Rights</h2>
-<p>You may stop using the App at any time. Since no account is created, there is no persistent personal data stored by the developer beyond the current session. For data held by Google (Firebase/AdMob), please refer to Google's privacy controls at <a href="https://myaccount.google.com" target="_blank">myaccount.google.com</a>.</p>
+    <div class="section">
+      <h2>Children's privacy</h2>
+      <p>This app is not directed at children under 13 years of age and does not knowingly collect information from children.</p>
+    </div>
 
-<h2>8. Changes to This Policy</h2>
-<p>We may update this Privacy Policy from time to time. Changes will be posted at this URL. Continued use of the App constitutes acceptance of the updated policy.</p>
+    <div class="section contact">
+      <h2>Contact</h2>
+      <p>If you have any questions about this Privacy Policy, contact the developer at:<br/><br/>
+      📧 <a href="mailto:sebastianmejia1203@gmail.com">sebastianmejia1203@gmail.com</a></p>
+    </div>
 
-<h2>9. Contact</h2>
-<p>If you have any questions about this Privacy Policy, contact us at: <strong>sebastianmejia1203@gmail.com</strong></p>
+  </div>
+
+  <!-- ESPAÑOL -->
+  <div data-lang="es">
+
+    <div class="section">
+      <div class="badge">✅ No se recopilan datos personales</div>
+      <h2>¿Qué datos recopila la app?</h2>
+      <p>Albion Tracker Mobile <strong>no recopila ningún dato personal</strong>. La app no solicita, almacena ni procesa nombres, correos electrónicos, números de teléfono, ubicaciones ni ningún otro dato que pueda identificar a un usuario.</p>
+      <br/>
+      <p>Los únicos datos utilizados dentro de la app son estadísticas del juego Albion Online (daño realizado, fama, plata obtenida, objetos recolectados, mazmorras exploradas), que se leen localmente desde los paquetes de red generados por el propio juego y nunca son enviados a servidores externos.</p>
+    </div>
+
+    <div class="section">
+      <h2>Conexión de red</h2>
+      <p>La app se conecta exclusivamente a un <strong>servidor local gestionado por el propio usuario</strong> (AlbionOnline Statistics Analysis Tool — SAT), instalado en la misma red que el dispositivo. Esta conexión se utiliza únicamente para recibir estadísticas del juego en tiempo real.</p>
+      <br/>
+      <p>No se envía ningún dato al servidor del desarrollador ni a ningún servidor fuera de la red local del usuario.</p>
+    </div>
+
+    <div class="section">
+      <h2>Compartir datos con terceros</h2>
+      <p>Albion Tracker Mobile <strong>no comparte ningún dato con terceros</strong>. No se utilizan servicios de analítica, redes publicitarias ni herramientas de seguimiento externas.</p>
+    </div>
+
+    <div class="section">
+      <h2>Función de party (opcional)</h2>
+      <p>La función opcional de party permite a los jugadores compartir estadísticas del juego (daño, fama, plata, arma utilizada) en tiempo real con otros miembros de su grupo. Estos datos se sincronizan a través de Firebase Realtime Database únicamente durante la sesión activa y <strong>no se almacenan de forma permanente</strong>. El único identificador utilizado es el nombre del personaje en el juego, introducido voluntariamente por el usuario.</p>
+    </div>
+
+    <div class="section">
+      <h2>Privacidad de menores</h2>
+      <p>Esta app no está dirigida a menores de 13 años y no recopila información de menores de forma consciente.</p>
+    </div>
+
+    <div class="section contact">
+      <h2>Contacto</h2>
+      <p>Si tienes alguna pregunta sobre esta Política de Privacidad, puedes contactar con el desarrollador en:<br/><br/>
+      📧 <a href="mailto:sebastianmejia1203@gmail.com">sebastianmejia1203@gmail.com</a></p>
+    </div>
+
+  </div>
+
+  <p class="updated">Last updated / Última actualización: February 25, 2026</p>
+</div>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('visible', el.dataset.lang === lang);
+    });
+    document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', (i === 0 && lang === 'en') || (i === 1 && lang === 'es'));
+    });
+    document.documentElement.lang = lang;
+  }
+</script>
 
 </body>
 </html>
