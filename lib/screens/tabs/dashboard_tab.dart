@@ -7,7 +7,6 @@ import '../../providers/connection_provider.dart';
 import '../../widgets/game_icon.dart';
 import '../../utils/formatters.dart';
 import '../../utils/zone_utils.dart';
-import '../../widgets/ad_widgets.dart';
 
 class DashboardTab extends StatefulWidget {
   final void Function(int tabIndex)? onNavigateToTab;
@@ -65,10 +64,6 @@ class _DashboardTabState extends State<DashboardTab> {
 
           // Kill/Death compact row
           _buildCombatRow(data, isDark),
-          const SizedBox(height: 10),
-
-          // Inline ad between combat and additional stats
-          const InlineBannerAd(),
           const SizedBox(height: 10),
 
           // Additional stats grid

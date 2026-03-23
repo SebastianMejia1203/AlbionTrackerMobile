@@ -3,13 +3,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/connection_provider.dart';
-import '../services/ad_service.dart';
-import '../widgets/ad_widgets.dart';
 
 // ─── Model ──────────────────────────────────────────────────────────────────
 
@@ -60,7 +57,6 @@ class _ConnectionScreenState extends State<ConnectionScreen>
     _pulseAnim = Tween<double>(begin: 0.6, end: 1.0).animate(
       CurvedAnimation(parent: _pulseCtrl, curve: Curves.easeInOut),
     );
-    AdService.instance.preloadInterstitial();
     _loadSavedConnection();
   }
 
@@ -176,7 +172,6 @@ class _ConnectionScreenState extends State<ConnectionScreen>
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('server_host', ip);
         await prefs.setInt('server_port', port);
-        await AdService.instance.showInterstitial();
         if (mounted) Navigator.pushReplacementNamed(context, '/home');
       } else if (mounted) {
         setState(() {
@@ -255,10 +250,9 @@ class _ConnectionScreenState extends State<ConnectionScreen>
                   width: double.infinity,
                   height: 48,
                   child: OutlinedButton.icon(
-                    onPressed: () => Navigator.of(context)
-                        .pushReplacementNamed('/party-join'),
+                    onPressed: null,
                     icon: const Icon(Icons.share_location, size: 20),
-                    label: const Text('Unirse a Party',
+                    label: const Text('Party no disponible',
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.w600)),
                     style: OutlinedButton.styleFrom(
@@ -269,13 +263,12 @@ class _ConnectionScreenState extends State<ConnectionScreen>
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Sin SAT. Introduce el código que te dio el host.',
+                  'La funcionalidad de Party está deshabilitada en esta versión.',
                   style: TextStyle(fontSize: 11, color: Colors.grey[500]),
                   textAlign: TextAlign.center,
                 ),
 
                 const SizedBox(height: 24),
-                const BannerAdWidget(adSize: AdSize.mediumRectangle),
               ],
             ),
           ),

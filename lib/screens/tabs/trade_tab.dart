@@ -6,7 +6,6 @@ import '../../providers/connection_provider.dart';
 import '../../widgets/common_widgets.dart';
 import '../../widgets/item_image_widget.dart';
 import '../../utils/formatters.dart';
-import '../../widgets/ad_widgets.dart';
 
 class TradeTab extends StatefulWidget {
   const TradeTab({super.key});
@@ -44,12 +43,9 @@ class _TradeTabState extends State<TradeTab> {
         Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            itemCount: itemCountWithAds(provider.trades.length),
+            itemCount: provider.trades.length,
             itemBuilder: (context, index) {
-              if (isAdIndex(index)) return const InlineBannerAd();
-              final realIdx = realItemIndex(index);
-              if (realIdx >= provider.trades.length) return const SizedBox.shrink();
-              return _buildTradeCard(provider.trades[realIdx], isDark);
+              return _buildTradeCard(provider.trades[index], isDark);
             },
           ),
         ),

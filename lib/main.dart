@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'firebase_options.dart';
 import 'providers/connection_provider.dart';
 import 'providers/dashboard_provider.dart';
 import 'providers/damage_meter_provider.dart';
@@ -18,26 +16,10 @@ import 'providers/theme_provider.dart';
 import 'screens/connection_screen.dart';
 import 'screens/splash_screen.dart';
 import 'screens/home_screen.dart';
-import 'screens/party_join_screen.dart';
 import 'theme/app_theme.dart';
-import 'services/ad_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  } catch (e) {
-    debugPrint('[main] Firebase.initializeApp failed: $e');
-  }
-
-  try {
-    await AdService.instance.init();
-  } catch (e) {
-    debugPrint('[main] AdService.init failed: $e');
-  }
 
   runApp(const AlbionTrackerApp());
 }
@@ -85,8 +67,6 @@ class AlbionTrackerApp extends StatelessWidget {
               '/': (context) => const SplashScreen(),
               '/connect': (context) => const ConnectionScreen(),
               '/home': (context) => const HomeScreen(),
-              '/party-join': (context) => const PartyJoinScreen(),
-              '/party-guest': (context) => const PartyGuestScreen(),
             },
           );
         },

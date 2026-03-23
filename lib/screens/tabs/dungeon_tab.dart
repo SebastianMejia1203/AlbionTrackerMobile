@@ -6,7 +6,6 @@ import '../../providers/connection_provider.dart';
 import '../../widgets/common_widgets.dart';
 import '../../widgets/item_image_widget.dart';
 import '../../utils/formatters.dart';
-import '../../widgets/ad_widgets.dart';
 
 class DungeonTab extends StatefulWidget {
   const DungeonTab({super.key});
@@ -46,12 +45,9 @@ class _DungeonTabState extends State<DungeonTab> {
         Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            itemCount: itemCountWithAds(sorted.length),
+            itemCount: sorted.length,
             itemBuilder: (context, index) {
-              if (isAdIndex(index)) return const InlineBannerAd();
-              final realIdx = realItemIndex(index);
-              if (realIdx >= sorted.length) return const SizedBox.shrink();
-              final dungeon = sorted[realIdx];
+              final dungeon = sorted[index];
               return Dismissible(
                 key: Key(dungeon.dungeonHash),
                 direction: DismissDirection.endToStart,
@@ -331,9 +327,9 @@ class _DungeonTabState extends State<DungeonTab> {
                 bottom: 0,
                 child: Container(
                   width: 3,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.greenAccent,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(12),
                       bottomLeft: Radius.circular(12),
                     ),
@@ -395,7 +391,7 @@ class _DungeonTabState extends State<DungeonTab> {
                           Text(Formatters.dateTime(dungeon.enterDungeonFirstTime),
                               style: TextStyle(fontSize: 10, color: Colors.grey[500])),
                           if (isActive)
-                            Row(
+                            const Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 SizedBox(
@@ -406,7 +402,7 @@ class _DungeonTabState extends State<DungeonTab> {
                                     color: Colors.greenAccent,
                                   ),
                                 ),
-                                const SizedBox(width: 4),
+                                SizedBox(width: 4),
                                 Text('En curso',
                                     style: TextStyle(fontSize: 10, color: Colors.greenAccent, fontWeight: FontWeight.w600)),
                               ],
@@ -446,8 +442,8 @@ class _DungeonTabState extends State<DungeonTab> {
                               errorBuilder: (_, __, ___) =>
                                   const Icon(Icons.dangerous, size: 14, color: Colors.red))
                         else
-                          Text('⚔',
-                              style: const TextStyle(fontSize: 13, color: Colors.green)),
+                          const Text('⚔',
+                              style: TextStyle(fontSize: 13, color: Colors.green)),
                       ],
                     ],
                   ),

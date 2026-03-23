@@ -6,7 +6,6 @@ import '../../providers/logging_provider.dart';
 import '../../providers/connection_provider.dart';
 import '../../widgets/common_widgets.dart';
 import '../../utils/formatters.dart';
-import '../../widgets/ad_widgets.dart';
 
 class LoggingTab extends StatefulWidget {
   const LoggingTab({super.key});
@@ -173,13 +172,10 @@ class _LoggingTabState extends State<LoggingTab> {
                 )
               : ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                  itemCount: itemCountWithAds(provider.notifications.length),
+                  itemCount: provider.notifications.length,
                   itemBuilder: (context, index) {
-                    if (isAdIndex(index)) return const InlineBannerAd();
-                    final realIdx = realItemIndex(index);
-                    if (realIdx >= provider.notifications.length) return const SizedBox.shrink();
                     return _buildNotificationCard(
-                        provider.notifications[realIdx], isDark);
+                        provider.notifications[index], isDark);
                   },
                 ),
         ),

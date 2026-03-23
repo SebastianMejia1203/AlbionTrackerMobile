@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import '../models/firebase_party_models.dart';
 import '../providers/firebase_party_provider.dart';
 import '../utils/formatters.dart';
-import '../widgets/ad_widgets.dart';
 import '../widgets/item_image_widget.dart';
 
 class PartyJoinScreen extends StatefulWidget {
@@ -172,7 +170,6 @@ class _PartyJoinScreenState extends State<PartyJoinScreen> {
                   ),
                 ),
                 const SizedBox(height: 32),
-                const BannerAdWidget(adSize: AdSize.banner),
               ],
             ),
           ),
@@ -308,8 +305,6 @@ class _PartyGuestScreenState extends State<PartyGuestScreen> {
                 _buildMemberCard(sorted[i], i, snap, theme, isDark),
           ),
         ),
-
-        const BannerAdWidget(adSize: AdSize.banner),
       ],
     );
   }

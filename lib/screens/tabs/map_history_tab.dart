@@ -6,7 +6,6 @@ import '../../providers/map_history_provider.dart';
 import '../../providers/connection_provider.dart';
 import '../../widgets/common_widgets.dart';
 import '../../utils/zone_utils.dart';
-import '../../widgets/ad_widgets.dart';
 
 class MapHistoryTab extends StatefulWidget {
   const MapHistoryTab({super.key});
@@ -43,12 +42,9 @@ class _MapHistoryTabState extends State<MapHistoryTab> {
       },
       child: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        itemCount: itemCountWithAds(provider.entries.length),
+        itemCount: provider.entries.length,
         itemBuilder: (context, index) {
-          if (isAdIndex(index)) return const InlineBannerAd();
-          final realIdx = realItemIndex(index);
-          if (realIdx >= provider.entries.length) return const SizedBox.shrink();
-          return _buildHistoryEntry(provider.entries[realIdx], realIdx);
+          return _buildHistoryEntry(provider.entries[index], index);
         },
       ),
     );

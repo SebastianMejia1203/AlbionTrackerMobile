@@ -8,7 +8,6 @@ import '../../providers/firebase_party_provider.dart';
 import '../../providers/connection_provider.dart';
 import '../../providers/damage_meter_provider.dart';
 import '../../providers/dashboard_provider.dart';
-import '../../widgets/ad_widgets.dart';
 import '../../widgets/common_widgets.dart';
 import '../../widgets/item_image_widget.dart';
 import '../../utils/formatters.dart';
@@ -137,142 +136,14 @@ class _PartyTabState extends State<PartyTab> {
           ),
           const SizedBox(width: 10),
           ElevatedButton(
-            onPressed: () => _showCreatePartyDialog(),
+            onPressed: null,
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
-            child: const Text('Crear Party'),
+            child: const Text('No disponible'),
           ),
         ],
-      ),
-    );
-  }
-
-  void _showCreatePartyDialog() {
-    int maxMembers = 5;
-    // ── Frecuencia fija de push en segundos.
-    // Para cambiarla, edita el valor de pushInterval en createParty() más abajo.
-    const int pushIntervalSeconds = 10;
-
-    final conn = context.read<ConnectionProvider>();
-    final hostName = conn.playerInfo.username.isNotEmpty
-        ? conn.playerInfo.username
-        : 'Host';
-
-    showDialog(
-      context: context,
-      builder: (ctx) => StatefulBuilder(
-        builder: (ctx, setDlg) => Dialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 56, height: 56,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.12),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(Icons.share_location,
-                      size: 28, color: Theme.of(context).colorScheme.primary),
-                ),
-                const SizedBox(height: 12),
-                const Text('Nueva Party Compartida',
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 4),
-                Text('Host: $hostName',
-                    style: TextStyle(fontSize: 12, color: Colors.grey[500])),
-                const SizedBox(height: 24),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                        color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2)),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.group_outlined, size: 18,
-                          color: Theme.of(context).colorScheme.primary),
-                      const SizedBox(width: 10),
-                      const Expanded(
-                        child: Text('Máximo de miembros',
-                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.remove_circle_outline, size: 22),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                        onPressed: maxMembers > 2 ? () => setDlg(() => maxMembers--) : null,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      const SizedBox(width: 8),
-                      SizedBox(
-                        width: 28,
-                        child: Text('$maxMembers',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                      ),
-                      const SizedBox(width: 8),
-                      IconButton(
-                        icon: const Icon(Icons.add_circle_outline, size: 22),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                        onPressed: maxMembers < 20 ? () => setDlg(() => maxMembers++) : null,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 28),
-                Row(
-                  children: [
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: () => Navigator.pop(ctx),
-                        style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        child: const Text('Cancelar'),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          Navigator.pop(ctx);
-                          final fb = context.read<FirebasePartyProvider>();
-                          final ok = await fb.createParty(
-                            hostName: hostName,
-                            maxMembers: maxMembers,
-                            pushInterval: pushIntervalSeconds, // ← editar aquí para cambiar frecuencia
-                          );
-                          if (!ok && mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(fb.error ?? 'Error desconocido')),
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        child: const Text('Crear Party',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }
@@ -530,12 +401,6 @@ class _PartyTabState extends State<PartyTab> {
       children: [
         // ── Firebase Party Sharing section ───────────────────────────────
         _buildShareSection(theme, isDark),
-
-        // ── AdMob banner (solo Android/iOS, 320×50, sin interrumpir flujo) ─
-        const Padding(
-          padding: EdgeInsets.only(bottom: 4),
-          child: BannerAdWidget(),
-        ),
 
         // ── SAT Party (divider only if share section is active) ──────────
         if (context.watch<FirebasePartyProvider>().isActive)
