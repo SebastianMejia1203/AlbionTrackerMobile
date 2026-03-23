@@ -1,4 +1,4 @@
-package com.example.albion_tracker_mobile
+package com.albiontracker.mobile
 
 import io.flutter.embedding.android.FlutterActivity
 
